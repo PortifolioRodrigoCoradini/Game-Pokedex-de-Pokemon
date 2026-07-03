@@ -1,0 +1,29 @@
+#import tkinter
+from tkinter import *
+from tkinter import ttk
+
+############## Cores ##############
+co0 = "#444466" #Preto
+co1 = "#feffff" #Branco
+co2 = "#6f9fbd" #Azul
+co3 = "#38576b" #Azul_Escuro
+co4 = "#403d3d" #Preto_letra
+co5 = "#ef5350" #Vermelho
+
+############## Criando Janela ##############
+janela = Tk()
+janela.title("")
+janela.geometry("550x510")
+janela.configure(bg=co1)
+
+ttk.Separator(janela, orient=HORIZONTAL).grid(row=0, columnspan=1, ipadx=272)
+
+style = ttk.Style(janela)
+style.theme_use("clam")
+
+############## Criando o Frame Dados Pokemon ##############
+frame_pokemon = Frame(janela, width=550, height=290, relief="flat")
+frame_pokemon.grid(row=1, column=0)
+
+############## Rodando a Janela ##############
+janela.mainloop()
