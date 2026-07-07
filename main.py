@@ -4,6 +4,9 @@ from dados import pokemons
 from funcoes.carregar_imagens import carregar_imagem
 from funcoes.criar_janela import criar_janela
 from funcoes.sorteio_pokemon import sorteio_pokemon
+from funcoes.carregar_Label import carregar_label
+from services.pokeapi import PokeAPI
+from models.pokemons import Pokemon
 
 ############## Cores ##############
 co0 = "#444466" #Preto
@@ -24,10 +27,7 @@ ESPACO_ENTRE_IMAGENS = 55
 titulo_janela = "POKEDEX POKEMON"
 janela = criar_janela(titulo_janela,LARGURA_JANELA, ALTURA_JANELA)
 
-#######--------------####### Criando o Frame Dados Pokemon #######--------------#######
-frame_pokemon = Frame(janela, width=550, height=290, relief="groove", bg=pokemons["Pikachu"]["Tipo"]["cor"])
-frame_pokemon.grid(row=1, column=0)
-
+############## Função Trocar Pokemon ##############
 def trocar_pokemon(nome):
     ############## Cor Fundo Frame
     frame_pokemon["bg"] = pokemons[nome]["Tipo"]["cor"]
@@ -53,57 +53,29 @@ def trocar_pokemon(nome):
     poke_habilidade1["text"] = pokemons[nome]["Habilidades"]["habilidade1"]
     poke_habilidade2["text"] = pokemons[nome]["Habilidades"]["habilidade2"]
     
-############## Nome Pokemon ##############
-poke_nome = Label(frame_pokemon, text="Pikachu", relief="flat", anchor=CENTER, font=("Fixedsys 20"), bg=co0, fg=co1)
-poke_nome.place(x=12, y=15)
+#######--------------####### Criando o Frame Dados Pokemon #######--------------#######
+frame_pokemon = Frame(janela, width=550, height=290, relief="groove", bg=pokemons["Pikachu"]["Tipo"]["cor"])
+frame_pokemon.grid(row=1, column=0)
 
-############## Tipo Pokemon ##############
-poke_tipo = Label(frame_pokemon, text="Elétrico", relief="flat", anchor=CENTER, font=("Ivy 10"), bg=co0, fg=co1)
-poke_tipo.place(x=12, y=50)
-
-############## ID Pokemon ##############
-poke_id = Label(frame_pokemon, text="#025", relief="flat", anchor=CENTER, font=("Ivy 10"), bg=co0, fg=co1)
-poke_id.place(x=12, y=75)
+poke_nome = carregar_label(frame_pokemon, 12, 15, "Pikachu", "Fixedsys 20 bold", co0, co1) #Nome
+poke_tipo = carregar_label(frame_pokemon, 12, 50, "Elétrico", "Ivy 10 bold", co0, co1) #Tipo
+poke_id = carregar_label(frame_pokemon, 12, 75, "#025", "Ivy 10 bold", co0, co1) #ID
 
 #######--------------####### Imagem Pokemon #######--------------#######
-poke_imagem = Label(frame_pokemon, relief="flat", bg=co0, fg=co1)
-poke_imagem.place(x=60, y=50)
+poke_imagem = carregar_label(frame_pokemon, 60, 50) #Imagem Pokemon
 
 #######--------------####### Status Pokemon #######--------------#######
-poke_status = Label(janela, text="Status", relief="flat", anchor=CENTER, font=("Verdana 20"), bg=co1, fg=co0)
-poke_status.place(x=15, y=310)
-
-############## HP Pokemon ##############
-poke_hp = Label(janela, text="HP: 300", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_hp.place(x=15, y=360)
-
-############## Ataque Pokemon ##############
-poke_ataque = Label(janela, text="Ataque: 600", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_ataque.place(x=15, y=385)
-
-############## Defeza Pokemon ##############
-poke_defeza = Label(janela, text="Defeza: 500", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_defeza.place(x=15, y=410)
-
-############## Velocidade Pokemon ##############
-poke_velocidade = Label(janela, text="Velocidade: 300", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_velocidade.place(x=15, y=435)
-
-############## Total Pokemon ##############
-poke_total = Label(janela, text="Total: 1.700", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_total.place(x=15, y=460)
+poke_status = carregar_label(janela, 15, 310, "Status", "Verdana 20 bold")
+poke_hp = carregar_label(janela, 15, 360, "HP: 300") #HP
+poke_ataque = carregar_label(janela, 15, 385, "Ataque: 600") #Ataque
+poke_defeza = carregar_label(janela, 15, 410, "Defeza: 500") #Defeza
+poke_velocidade = carregar_label(janela, 15, 435, "Velocidade: 300") #Velocidade
+poke_total = carregar_label(janela, 15, 460, "Total: 1.700") #Total
 
 #######--------------####### Habilidades Pokemon #######--------------#######
-poke_habilidades = Label(janela, text="Habilidades", relief="flat", anchor=CENTER, font=("Verdana 20"), bg=co1, fg=co0)
-poke_habilidades.place(x=180, y=310)
-
-############## Habilidade 1 Pokemon ##############
-poke_habilidade1 = Label(janela, text="Choque do Trovão", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_habilidade1.place(x=195, y=360)
-
-############## Habilidade 2 Pokemon ##############
-poke_habilidade2 = Label(janela, text="Cabeçada", relief="flat", anchor=CENTER, font=("Verdana 10"), bg=co1, fg=co2)
-poke_habilidade2.place(x=195, y=385)
+poke_habilidades = carregar_label(janela, 180, 310, "Habilidades", "Verdana 20 bold")
+poke_habilidade1 = carregar_label(janela, 195, 360, "Choque do Trovão") #Habilidade 1
+poke_habilidade2 = carregar_label(janela, 195, 385, "Cabeçada") #Habilidade 2
 
 #######--------------####### Criando Botões #######--------------#######
 
@@ -117,6 +89,17 @@ for i, (nome, dados) in enumerate(pokemons.items()):
 
 ############## Trocar o Pokemon quando Abrir ##############
 trocar_pokemon(sorteio_pokemon())
+
+api = PokeAPI()
+pikachu = api.buscar("pikachu")
+print(pikachu.nome)
+print(pikachu.id)
+print(pikachu.tipo1)
+print(pikachu.movimentos)
+print(pikachu.habilidades)
+print(pikachu.altura)
+print(pikachu.peso)
+print(pikachu.descricao)
 
 #######--------------####### Rodando a Janela #######--------------#######
 janela.mainloop()
