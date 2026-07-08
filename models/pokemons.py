@@ -14,10 +14,11 @@ class Pokemon:
                 tipos,
                 habilidades,
                 movimentos,
-                #geracao,
+                geracao,
                 descricao,
                 altura,
-                peso
+                peso,
+                status
                 #imagem
                 ): 
         self.nome = nome
@@ -25,6 +26,12 @@ class Pokemon:
         self.tipo1 = tipos
         self.habilidades = habilidades
         self.movimentos = movimentos
+        self.geracao = geracao
         self.descricao = descricao
         self.altura = altura
         self.peso = peso
+        self._status = status
+
+        @property
+        def status(self):
+            return self._status

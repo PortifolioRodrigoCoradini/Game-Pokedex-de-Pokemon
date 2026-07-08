@@ -7,6 +7,7 @@ from funcoes.sorteio_pokemon import sorteio_pokemon
 from funcoes.carregar_Label import carregar_label
 from services.pokeapi import PokeAPI
 from models.pokemons import Pokemon
+from models.status import Status
 
 ############## Cores ##############
 co0 = "#444466" #Preto
@@ -100,6 +101,8 @@ print(pikachu.habilidades)
 print(pikachu.altura)
 print(pikachu.peso)
 print(pikachu.descricao)
+print(pikachu.geracao)
+print(pikachu._status.total)
 
 #######--------------####### Rodando a Janela #######--------------#######
 janela.mainloop()
