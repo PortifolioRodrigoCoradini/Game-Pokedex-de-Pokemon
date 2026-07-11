@@ -1,5 +1,6 @@
 class Status:
 
+    ############## Iniciando ##############
     def __init__(self,
         hp,
         ataque,
@@ -39,6 +40,7 @@ class Status:
     def velocidade(self):
         return self._velocidade
     
+    ############## Definindo Total ##############
     @property
     def total(self):
         return (self._hp

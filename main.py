@@ -1,13 +1,14 @@
 from tkinter import *
 from PIL import Image
 from dados import pokemons
-from funcoes.carregar_imagens import carregar_imagem
-from funcoes.criar_janela import criar_janela
-from funcoes.sorteio_pokemon import sorteio_pokemon
-from funcoes.carregar_Label import carregar_label
+from utils.carregar_imagens import carregar_imagem
+from utils.criar_janela import criar_janela
+from utils.sorteio_pokemon import sorteio_pokemon
+from utils.carregar_Label import carregar_label
 from services.pokeapi import PokeAPI
 from models.pokemons import Pokemon
 from models.status import Status
+from views.janela_principal import Janela_Principal
 
 ############## Cores ##############
 co0 = "#444466" #Preto
@@ -92,17 +93,49 @@ for i, (nome, dados) in enumerate(pokemons.items()):
 trocar_pokemon(sorteio_pokemon())
 
 api = PokeAPI()
-pikachu = api.buscar("pikachu")
-print(pikachu.nome)
-print(pikachu.id)
-print(pikachu.tipo1)
-print(pikachu.movimentos)
-print(pikachu.habilidades)
-print(pikachu.altura)
-print(pikachu.peso)
-print(pikachu.descricao)
-print(pikachu.geracao)
-print(pikachu._status.total)
-
+pokemon = api.buscar("rattata")
+print("---------------- Testes Gerais ----------------")
+print(pokemon._nome)
+print(pokemon._id)
+print(pokemon._tipos)
+print(pokemon._habilidades)
+print(pokemon._altura)
+print(pokemon._peso)
+print(pokemon._descricao)
+print(pokemon._geracao)
+print(pokemon._status.total)
+print("---------------- Teste Movimento ----------------")
+for move in pokemon.movimentos:
+    print(f"Nome: {move.nome}")
+    print(f"Tipo: {move.tipo}")
+    print(f"Categoria: {move.categoria}")
+    print(f"Poder: {move.poder}")
+    print(f"Precisão: {move.precisao}")
+    print(f"PP: {move.pp}")
+    print(f"Descrição: {move.descricao}")
+    print("-" * 30)
+print("---------------- Teste Habilidades ----------------")
+for habili in pokemon.habilidades:
+    print(habili.nome)
+    print(habili.descricao)
+print("---------------- Teste Tipos ----------------")
+for tipo in pokemon.tipos:
+    print(tipo.nome)
+    print(tipo.cor)
+    print(tipo.fraquezas)
+    print(tipo.resistencias)
+    print(tipo.imunidades)
+print("---------------- Teste Evoluções ----------------")
+for evo in pokemon.evolucoes:
+    print(evo.nome)
+    print(evo.metodo)
+    print(evo.nivel)
+    print("-" * 20)
+print("---------------- Teste Evoluções ----------------")
+print(pokemon.imagem._oficial)
+print(pokemon.imagem._shiny)
 #######--------------####### Rodando a Janela #######--------------#######
 janela.mainloop()
+
+#app = Janela_Principal()
+#app.executar()
