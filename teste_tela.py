@@ -1,4 +1,4 @@
 from views.janela_principal import Janela_Principal
 
 app = Janela_Principal()
-#app.executar()
+app.janela.mainloop()
