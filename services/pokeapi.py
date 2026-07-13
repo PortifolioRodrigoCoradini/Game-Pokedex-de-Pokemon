@@ -9,7 +9,7 @@ from models.evolutions import Evolucoes
 from models.imagens import Imagens
 
 ############## Variáveis Globais ##############
-QTD_MOVIMENTOS = 4
+QTD_MOVIMENTOS = 8
 QTD_HABILIDADES = 3
 GERACOES = {
     "generation-i": "1ª Geração",
@@ -74,8 +74,8 @@ class PokeAPI:
                             self._buscar_movimentos(resposta),
                             GERACOES[especie["generation"]["name"]],
                             self._buscar_descricao(especie["flavor_text_entries"], "flavor_text"),
-                            (f"{resposta["height"]/10:.1f}m"),
-                            (f"{resposta["weight"]/10:.1f}kg"),
+                            (f"{resposta["height"]/10:.1f}m").replace(".", ","),
+                            (f"{resposta["weight"]/10:.1f}kg").replace(".", ","),
                             self._buscar_status(resposta),
                             self._buscar_habitat(especie),
                             self._buscar_lendario(especie),
